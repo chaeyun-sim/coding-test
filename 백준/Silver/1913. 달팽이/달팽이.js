@@ -1,41 +1,41 @@
-const fs = require('fs')
-const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
+const fs = require('fs');
+const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
-const n = Number(input[0])
-const m = Number(input[1])
-const arr = new Array(n * n).fill(0)
+const n = Number(input[0]);
+const target = Number(input[1]);
 
-const dx = [0, 1, 0, -1]
-const dy = [-1, 0, 1, 0]
-let matrix = Array.from({ length: n }, () => Array(n).fill(0));
+const arr = Array.from({ length: n }, () => Array(n).fill(0));
+
+// 방향: 남, 동, 북, 서
+const direction = [
+  // y, x
+  [1, 0],
+  [0, 1],
+  [-1, 0],
+  [0, -1],
+];
 
 let num = n * n;
-let x = 0;
+let d = 0;
 let y = 0;
-let dir = 0;
-const isValid = (nx, ny) => nx < 0 || nx >= n || ny < 0 || ny >= n || matrix[nx][ny] !== 0
-let result = ''
+let x = 0;
+let result = '';
+
+const isValid = (ny, nx) => ny >= 0 && ny < n && nx >= 0 && nx < n && !arr[ny][nx];
 
 while (num > 0) {
-    matrix[x][y] = num--;
-        
-    let nx = x + dx[dir];
-    let ny = y + dy[dir];
+  arr[y][x] = num;
+  if (num === target) result = `${y + 1} ${x + 1}`;
+  num--;
 
-    if (isValid(nx, ny)) {
-        dir = (dir + 1) % 4;
-        nx = x + dx[dir];
-        ny = y + dy[dir];
-    }
-    
-    if (matrix[x][y] === m) {
-        result += `${x + 1} ${y + 1}`
-    }
-    
-    x = nx;
-    y = ny;
+  const ny = y + direction[d][0];
+  const nx = x + direction[d][1];
+
+  if (!isValid(ny, nx)) d = (d + 1) % 4;
+
+  y += direction[d][0];
+  x += direction[d][1];
 }
 
-
-matrix.forEach(row => console.log(row.join(' ')))
-console.log(result)
+arr.forEach(row => console.log(row.join(' ')));
+console.log(result);
