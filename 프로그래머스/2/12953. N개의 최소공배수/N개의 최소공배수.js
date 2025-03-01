@@ -1,5 +1,7 @@
 function solution(arr) {
-    let n = 2
+    arr.sort((a, b) => b - a)
+    
+    let n = arr[0]
     while (n > 0) {
         if (arr.every(el => n % el === 0)) return n
         n++
