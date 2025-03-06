@@ -6,8 +6,8 @@ function solution(s) {
         ')' : '('
     }
     const map = new Map(Object.values(obj).map(el => [el, 0]))
+    const arr = [...s]
     
-    let start = 0
     let end = s.length
     let count = 0
     
@@ -15,8 +15,11 @@ function solution(s) {
         const stack = []
         let isValid = true;
         
-        for (const item of str.slice(start, end)) {
-            if (Object.values(obj).includes(item)) {
+        arr.shift()
+        arr.push(str[end])
+        
+        for (const item of arr) {
+            if (!obj[item]) {
                 stack.push(item)
             } else {
                 if (!stack.length || stack.at(-1) !== obj[item]) {
@@ -28,7 +31,6 @@ function solution(s) {
         }
         if (isValid && stack.length === 0) count++;
         
-        start++
         end++
     }
     
