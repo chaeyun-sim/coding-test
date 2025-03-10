@@ -3,8 +3,9 @@ function solution(citations) {
     let h = 0;
     
     for (let i = 0; i < citations.length; i++) {
-        if (citations[i] < i + 1) break;
-        h = i + 1
+        let curr = i + 1
+        if (citations[i] < curr) break;
+        h = curr
     }
     
     return h;
