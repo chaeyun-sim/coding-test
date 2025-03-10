@@ -3,8 +3,7 @@ function solution(progresses, speeds) {
     const arr = []
     
     for (let i = 0; i < progresses.length; i++) {
-        const p = progresses[i]
-        arr.push(Math.ceil((LIMIT - p) / speeds[i]))
+        arr.push(Math.ceil((LIMIT - progresses[i]) / speeds[i]))
     }
     
     let cnt = 0
@@ -14,11 +13,10 @@ function solution(progresses, speeds) {
     for (const item of arr) {
         if (item > max) {
             result.push(cnt)
-            cnt = 1
+            cnt = 0
             max = item
-        } else {
-            cnt++
         }
+        cnt++
     }
     
     return [...result, cnt]
