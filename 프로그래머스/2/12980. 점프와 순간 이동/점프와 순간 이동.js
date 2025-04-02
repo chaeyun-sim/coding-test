@@ -1,14 +1,13 @@
 function solution(n) {
-    let teleport = 0
+    let cnt = 0
     while (n > 0) {
-        if (n % 2) {
-            n--
-            teleport++
+        if (n % 2 === 0) {
+            n /= 2
+            continue;
         }
         
-        n /= 2
+        n--
+        cnt++
     }
-    return teleport
+    return cnt
 }
-
-// *2 또는 -1
