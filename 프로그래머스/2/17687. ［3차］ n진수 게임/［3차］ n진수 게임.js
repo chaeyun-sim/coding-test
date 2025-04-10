@@ -1,16 +1,17 @@
 function solution(n, t, m, p) {
-    let string = '';
-    let result = '';
-    let i = 0;
-    
-    while (string.length < t * m) {
-        string += i.toString(n).toUpperCase();
-        i++;
+    let str = ''
+    let number = 0
+
+    while (str.length < t * m) {
+        str += number.toString(n).toUpperCase()
+        number++
     }
     
-    for (let i = p - 1; result.length < t; i += m) {
-        result += string[i];
+    let result = ''
+    for (let i = 0; result.length < t; i++) {
+        if (i % m === p - 1) {
+            result += str[i]
+        }
     }
-    
-    return result;
+    return result
 }
