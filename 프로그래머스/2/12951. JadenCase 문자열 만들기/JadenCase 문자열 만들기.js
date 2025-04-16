@@ -1,13 +1,13 @@
 function solution(s) {
-    const arr = s.split(" ")
-    const result = []
+    let result = ''
     
-    arr.forEach(str => {
-        if (str === '') result.push(str)
-        else {
-            result.push(str[0].toUpperCase() + str.slice(1).toLowerCase())
+    for (let i = 0; i < s.length; i++) {
+        if (i === 0 || s[i - 1] === ' ') {
+            result += s[i].toUpperCase()
+        } else {
+            result += s[i].toLowerCase()
         }
-    })
+    }
     
-    return result.join(' ')
+    return result
 }
